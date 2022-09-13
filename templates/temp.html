@@ -1,0 +1,13 @@
+<html>
+    <body>
+        <form action="/temp" method="post">
+        <p>{{u}}</p>
+        <select name="pin">
+            {%for i in u%}
+       <option value="{{i[1]}}"> {{i[1]}}</option>
+        {%endfor%}
+        </select>
+        <input type="submit" value="submit">
+        </form>
+    </body>
+</html>

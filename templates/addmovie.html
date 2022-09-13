@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+
+    <!----======== CSS ======== -->
+    <!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style1.css') }}"> -->
+
+    <!-- <link rel="stylesheet" href="style1.css"> -->
+
+    <!----===== Iconscout CSS ===== -->
+    <!-- <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"> -->
+
+    <title>Responsive Regisration Form </title>
+    <style>
+        /* css for side bar */
+
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+        * {
+            list-style: none;
+            text-decoration: none;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        body {
+            background: #f5f6fa;
+        }
+
+        .wrapper .sidebar {
+            background: rgb(5, 68, 104);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 225px;
+            height: 100%;
+            padding: 20px 0;
+            transition: all 0.5s ease;
+        }
+
+        .wrapper .sidebar .profile {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .wrapper .sidebar .profile img {
+            display: block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .wrapper .sidebar .profile h3 {
+            color: #ffffff;
+            margin: 10px 0 5px;
+        }
+
+        .wrapper .sidebar .profile p {
+            color: rgb(206, 240, 253);
+            font-size: 14px;
+        }
+
+        .wrapper .sidebar ul li a {
+            display: block;
+            padding: 13px 30px;
+            border-bottom: 1px solid #10558d;
+            color: rgb(241, 237, 237);
+            font-size: 16px;
+            position: relative;
+        }
+
+        .wrapper .sidebar ul li a .icon {
+            color: #dee4ec;
+            width: 30px;
+            display: inline-block;
+        }
+
+
+
+        .wrapper .sidebar ul li a:hover,
+        .wrapper .sidebar ul li a.active {
+            color: #0c7db1;
+
+            background: white;
+            border-right: 2px solid rgb(5, 68, 104);
+        }
+
+        .wrapper .sidebar ul li a:hover .icon,
+        .wrapper .sidebar ul li a.active .icon {
+            color: #0c7db1;
+        }
+
+        .wrapper .sidebar ul li a:hover:before,
+        .wrapper .sidebar ul li a.active:before {
+            display: block;
+        }
+
+        .wrapper .section {
+            width: calc(100% - 225px);
+            margin-left: 225px;
+            transition: all 0.5s ease;
+        }
+
+        .wrapper .section .top_navbar {
+            background: rgb(7, 105, 185);
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+
+        }
+
+        .wrapper .section .top_navbar .hamburger a {
+            font-size: 28px;
+            color: #f4fbff;
+        }
+
+        .wrapper .section .top_navbar .hamburger a:hover {
+            color: #a2ecff;
+        }
+
+
+
+        body.active .wrapper .sidebar {
+            left: -225px;
+        }
+
+        body.active .wrapper .section {
+            margin-left: 0;
+            width: 100%;
+        }
+
+        body {
+            margin: 0;
+            /* Reset default margin */
+        }
+
+        iframe {
+            display: block;
+            /* iframes are inline by default */
+            background: rgb(15, 205, 126);
+            border: none;
+            /* Reset default border */
+            height: 100vh;
+            /* Viewport-relative units */
+            width: 100vw;
+
+        }
+
+
+        /* css for form  */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #4070f4;
+        }
+
+        .container {
+            position: relative;
+            max-width: 900px;
+            width: 100%;
+            border-radius: 6px;
+            padding: 30px;
+            margin: 0 15px;
+            background-color: #fff;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container header {
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .container header::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            height: 3px;
+            width: 27px;
+            border-radius: 8px;
+            background-color: #4070f4;
+        }
+
+        .container form {
+            position: relative;
+            margin-top: 16px;
+            min-height: 490px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .container form .form {
+            position: absolute;
+            background-color: #fff;
+            transition: 0.3s ease;
+        }
+
+        .container form .form.second {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(100%);
+        }
+
+        form.secActive .form.second {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        form.secActive .form.first {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-100%);
+        }
+
+        .container form .title {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 6px 0;
+            color: #333;
+        }
+
+        .container form .fields {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        form .fields .input-field {
+            display: flex;
+            width: calc(100% / 3 - 15px);
+            flex-direction: column;
+            margin: 4px 0;
+        }
+
+        .input-field label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #2e2e2e;
+        }
+
+        .input-field input,
+        select {
+            outline: none;
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            padding: 0 15px;
+            height: 42px;
+            margin: 8px 0;
+        }
+
+        .input-field input :focus,
+        .input-field select:focus {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+        }
+
+        .input-field select,
+        .input-field input[type="date"] {
+            color: #707070;
+        }
+
+        .input-field input[type="date"]:valid {
+            color: #333;
+        }
+
+        .container form button,
+        .backBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 45px;
+            max-width: 200px;
+            width: 100%;
+            border: none;
+            outline: none;
+            color: #fff;
+            border-radius: 5px;
+            margin: 25px 0;
+            background-color: #4070f4;
+            transition: all 0.3s linear;
+            cursor: pointer;
+        }
+
+        .container form .btnText {
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        form button:hover {
+            background-color: #265df2;
+        }
+
+        form button i,
+        form .backBtn i {
+            margin: 0 6px;
+        }
+
+        form .backBtn i {
+            transform: rotate(180deg);
+        }
+
+        form .buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        form .buttons button,
+        .backBtn {
+            margin-right: 14px;
+        }
+
+        @media (max-width: 750px) {
+            .container form {
+                overflow-y: scroll;
+            }
+
+            .container form::-webkit-scrollbar {
+                display: none;
+            }
+
+            form .fields .input-field {
+                width: calc(100% / 2 - 15px);
+            }
+        }
+
+        @media (max-width: 550px) {
+            form .fields .input-field {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <script>
+
+        const form = document.querySelector("form"),
+            nextBtn = form.querySelector(".nextBtn"),
+            backBtn = form.querySelector(".backBtn"),
+            allInput = form.querySelectorAll(".first input");
+
+
+        nextBtn.addEventListener("click", () => {
+            allInput.forEach(input => {
+                if (input.value != "") {
+                    form.classList.add('secActive');
+                } else {
+                    form.classList.remove('secActive');
+                }
+            })
+        })
+
+        backBtn.addEventListener("click", () => form.classList.remove('secActive'));
+
+    </script>
+</head>
+
+
+
+
+
+<body>
+
+    <!-- side bar fields -->
+
+
+    <div class="wrapper">
+
+        <div class="section">
+
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="sidebar">
+            <div class="profile">
+                <!-- <img src="https://1.bp.blogspot.com/-vhmWFWO2r8U/YLjr2A57toI/AAAAAAAACO4/0GBonlEZPmAiQW4uvkCTm5LvlJVd_-l_wCNcBGAsYHQ/s16000/team-1-2.jpg" alt="profile_picture"> -->
+                <i class="fas fa-user-shield"></i>
+                <h3>Admin</h3>
+                <p>Developer</p>
+            </div>
+            <ul>
+                <li>
+                    <a href="/index" target='targetframe' class="active">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/addtheater">
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="item" onclick="myFunction()">AddTheater</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/addmovie" onclick="loadHtml('templates','movies.html')">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">AddMovie</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/addowner">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">AddOwner</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/deletet">
+                        <span class="icon"><i class="fas fa-database"></i></span>
+                        <span class="item">DeleteTheater</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/shows">
+                        <span class="icon"><i class="fas fa-chart-line"></i></span>
+                        <span class="item">CancelShows</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/addcity">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">AddCity</span>
+                    </a>
+                </li>
+
+                <!-- <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">Admin</span>
+                    </a>
+                </li> -->
+
+
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+
+
+    <!-- <iframe id="myFrame" ></iframe> -->
+
+    <!-- <iframe id="myFrame" src="templates/login.html"></iframe> -->
+
+
+
+
+
+    <script>
+        var hamburger = document.querySelector(".hamburger");
+        hamburger.addEventListener("click", function () {
+            document.querySelector("body").classList.toggle("active");
+        })
+    </script>
+
+
+    <!-- form fields -->
+    <div class="container">
+        <header>ADD MOVIE</header>
+        <p style="color:red" align="center">{{u}}</p>
+        <form action="/addmovief" method="post">
+            <div class="form first">
+                <div class="details personal">
+                    <span class="title">Movie Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Movie Name</label>
+                            <input type="text" name='m' placeholder="Enter Movie Name" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Release Date</label>
+                            <input type="number" name='y' min="1900" max="2022" step="1" placeholder="Enter year" />
+
+                            <!-- <input type="date" placeholder="Enter release Date" required> -->
+                        </div>
+
+
+
+                        <div class="input-field">
+                            <label>Movie Length</label>
+                            <input type="number" name='l' placeholder="Enter Movie Length" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Genre</label>
+                            <input type="text" name='g' placeholder="Enter Genre separted by | " required>
+                        </div>
+
+
+
+
+                        <div class="input-field">
+                            <label>Description</label>
+                            <input type="text " name='d' placeholder="Enter Description " required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details ID">
+                    <button class="submit">
+                        <span class="btnText">Submit</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}"> -->
+
+    <!-- <script src="{{ url_for('static',filename='styles/script1.js') }}"> </script> -->
+
+    <!-- <script src="script1.js"></script> -->
+</body>
+
+</html>
